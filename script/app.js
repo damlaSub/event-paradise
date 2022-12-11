@@ -61,5 +61,5 @@ form.addEventListener("submit", (event) => {
 
   //implement form reset
   form.reset();
-  tooltip.hide();
+  //tooltip.hide();
 });
