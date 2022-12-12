@@ -31,8 +31,6 @@ for (const element of elements) {
       helptext.classList.add("text-danger");
       //1-add tooltips on inputs, selectors and textarea:
 
-      // 3-add a tooltip on the first element with an error: not finished!
-
       element.setAttribute("data-bs-toggle", "tooltip");
       element.setAttribute("data-bs-placement", "bottom");
       element.setAttribute("data-bs-custom-class", "custom-tooltip");
@@ -40,21 +38,39 @@ for (const element of elements) {
       //2- add tooltip according to error type:
       if (element.validity.valueMissing == true) {
         element.setAttribute("data-bs-title", `${errorMessages.missed}`);
-      } else if (elementName == "date") {
+      } else if (elementName == "date" && element.validity.rangeUnderflow) {
         element.setAttribute("data-bs-title", `${errorMessages.date}`);
-      } else if (elementName == "price") {
+      } else if (elementName == "price" && element.validity.rangeUnderflow) {
         element.setAttribute("data-bs-title", `${errorMessages.price}`);
       } else {
         console.log("Salut toto");
       }
       const option = { trigger: "focus" };
       const tooltip = bootstrap.Tooltip.getOrCreateInstance(element, option);
-      //const invalidElement = form.getElementsByClassName("is-invalid");
+
+      // 3-add a tooltip on the first element with an error
+
       const invalidField = form.querySelector(".is-invalid"); // get the first one and add a focus on it??
       console.log(invalidField);
       invalidField.focus();
       if (element == invalidField) {
         tooltip.show();
+      }
+    });
+
+    //add change event on inputs etc for instance changes:
+
+    element.addEventListener("change", (event) => {
+      const elementName = element.name;
+      const helptext = document.getElementById(`${elementName}-helptext`);
+      if (element.checkValidity()) {
+        element.classList.remove("is-invalid");
+        element.classList.add("is-valid");
+        helptext.classList.remove("text-danger");
+        helptext.classList.add("text-success");
+        // I need to disable (in state of enable) my tooltip
+        //?????
+        //
       }
     });
   }
@@ -65,13 +81,14 @@ for (const element of elements) {
 
     // implement toaster when the form subitted by success ("Événement créé avec succès.")
     toast.show();
-    // delete is-invalid class on input so I won't have a red border around my input
-    element.classList.remove("is-invalid");
+    // delete is-invalid class on input so I won't have a green border around my input
 
-    //change helptexts color
+    element.classList.remove("is-valid");
+
+    //change helptexts color after the submission:
     const elementName = element.name;
     const helptext = document.getElementById(`${elementName}-helptext`);
-    helptext.classList.remove("text-danger");
+    helptext.classList.remove("text-success");
     //implement form reset
     form.reset();
   });

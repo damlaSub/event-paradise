@@ -10,5 +10,6 @@ div.custom-tooltip {
 .toast {
     position: absolute;
     padding-top: 5px;
-    bottom: 5px; right: 10px;
+    bottom: 1px; right: 10px;
 }
+
