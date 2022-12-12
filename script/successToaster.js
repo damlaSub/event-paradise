@@ -19,7 +19,3 @@ thirdToastDiv.innerHTML = "Événement créé avec succès.";
 secondToastDiv.appendChild(thirdToastDiv);
 
 const toast = new bootstrap.Toast(firstToastDiv);
-/*
-firstToastDiv.classList.add("position-relative");
-firstToastDiv.classList.add("bottom-0");
-firstToastDiv.classList.add("end-0");*/

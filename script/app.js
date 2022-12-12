@@ -25,9 +25,6 @@ for (const element of elements) {
       event.preventDefault(); //prevent the event html validdation (field control)
 
       element.classList.add("is-invalid"); // we will get invalid elements
-      //const invalidElement = form.getElementsByClassName("is-invalid");
-      const invalidField = form.getElementsByClassName("is-invalid"); // get the first one and add a focus on it
-      console.log(invalidField);
 
       const elementName = element.name;
       const helptext = document.getElementById(`${elementName}-helptext`);
@@ -42,18 +39,23 @@ for (const element of elements) {
 
       //2- add tooltip according to error type:
       if (element.validity.valueMissing == true) {
-        element.setAttribute("data-bs-title", "Ce champ est obligatoire");
+        element.setAttribute("data-bs-title", `${errorMessages.missed}`);
       } else if (elementName == "date") {
-        element.setAttribute(
-          "data-bs-title",
-          "Doit être égale ou supérieure à aujourd’hui"
-        );
+        element.setAttribute("data-bs-title", `${errorMessages.date}`);
       } else if (elementName == "price") {
-        element.setAttribute("data-bs-title", "Doit être positif");
+        element.setAttribute("data-bs-title", `${errorMessages.price}`);
+      } else {
+        console.log("Salut toto");
       }
-
-      const tooltip = bootstrap.Tooltip.getOrCreateInstance(element);
-      tooltip.show();
+      const option = { trigger: "focus" };
+      const tooltip = bootstrap.Tooltip.getOrCreateInstance(element, option);
+      //const invalidElement = form.getElementsByClassName("is-invalid");
+      const invalidField = form.querySelector(".is-invalid"); // get the first one and add a focus on it??
+      console.log(invalidField);
+      invalidField.focus();
+      if (element == invalidField) {
+        tooltip.show();
+      }
     });
   }
 }
@@ -63,14 +65,13 @@ for (const element of elements) {
 
     // implement toaster when the form subitted by success ("Événement créé avec succès.")
     toast.show();
-    // delete is-invalid class on input
+    // delete is-invalid class on input so I won't have a red border around my input
     element.classList.remove("is-invalid");
 
     //change helptexts color
     const elementName = element.name;
     const helptext = document.getElementById(`${elementName}-helptext`);
     helptext.classList.remove("text-danger");
-    console.log(helptext.classList);
     //implement form reset
     form.reset();
   });
