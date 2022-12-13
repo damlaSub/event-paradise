@@ -33,7 +33,14 @@ for (const element of elements) {
       //then setContent to tooltip-inner for changing its message
       if (element.validity.valueMissing == true) {
         element.setAttribute("data-bs-title", `${errorMessages.missed}`);
+      } else if (elementName == "date" && element.validity.rangeUnderflow) {
+        element.setAttribute("data-bs-title", `${errorMessages.date}`);
+      } else if (elementName == "price" && element.validity.rangeUnderflow) {
+        element.setAttribute("data-bs-title", `${errorMessages.price}`);
+      } else {
+        console.log("Salut toto");
       }
+
       // I get/create the tooltip
       const tooltip = bootstrap.Tooltip.getOrCreateInstance(element);
       // then I set a new content for the date and price in case they are "rangeUnderflow":
@@ -42,7 +49,7 @@ for (const element of elements) {
       } else if (elementName == "price" && element.validity.rangeUnderflow) {
         tooltip.setContent({ ".tooltip-inner": `${errorMessages.price}` });
       } else {
-        console.log("Salut toto");
+        console.log("toto");
       }
 
       // 3-add a tooltip on the first element with an error
