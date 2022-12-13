@@ -12,8 +12,6 @@ toastContainer.appendChild(firstToastDiv);
 firstToastDiv.classList.add("toast");
 firstToastDiv.classList.add("align-items-center");
 firstToastDiv.setAttribute("role", "alert");
-firstToastDiv.setAttribute("aria-live", "assertive");
-firstToastDiv.setAttribute("aria-atomic", true);
 firstToastDiv.classList.add("bg-success");
 firstToastDiv.classList.add("text-white");
 
