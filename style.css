@@ -7,9 +7,3 @@ div.custom-tooltip {
     --bs-tooltip-bg: var(--bs-danger);
 } 
 
-.toast {
-    position: absolute;
-    padding-top: 5px;
-    bottom: 1px; right: 10px;
-}
-

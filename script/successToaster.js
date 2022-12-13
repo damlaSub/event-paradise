@@ -1,6 +1,14 @@
-// implement toaster for success "Événement créé avec succès."
+// implement toaster for success "Événement créé avec succès." <div class="toast-container position-static">
+const staticDiv = document.createElement("div");
+form.appendChild(staticDiv);
+staticDiv.classList.add("toast-container");
+staticDiv.classList.add("position-absolute");
+staticDiv.classList.add("bottom-0");
+staticDiv.classList.add("end-0");
+staticDiv.classList.add("p-3");
+
 const firstToastDiv = document.createElement("div");
-form.appendChild(firstToastDiv);
+staticDiv.appendChild(firstToastDiv);
 firstToastDiv.classList.add("toast");
 firstToastDiv.classList.add("align-items-center");
 firstToastDiv.setAttribute("role", "alert");

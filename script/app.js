@@ -45,17 +45,13 @@ for (const element of elements) {
       } else {
         console.log("Salut toto");
       }
-      const option = { trigger: "focus" };
-      const tooltip = bootstrap.Tooltip.getOrCreateInstance(element, option);
+      const tooltip = bootstrap.Tooltip.getOrCreateInstance(element);
 
       // 3-add a tooltip on the first element with an error
 
       const invalidField = form.querySelector(".is-invalid"); // get the first one and add a focus on it??
-      console.log(invalidField);
+
       invalidField.focus();
-      if (element == invalidField) {
-        tooltip.show();
-      }
     });
 
     //add change event on inputs etc for instance changes:
@@ -68,8 +64,9 @@ for (const element of elements) {
         element.classList.add("is-valid");
         helptext.classList.remove("text-danger");
         helptext.classList.add("text-success");
-        // I need to disable (in state of enable) my tooltip
-        //?????
+        // I need to create and dispose my tooltip in case of valid input
+        const tooltip = bootstrap.Tooltip.getOrCreateInstance(element);
+        tooltip.dispose(element);
         //
       }
     });
