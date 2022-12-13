@@ -76,12 +76,7 @@ for (const element of elements) {
         // create and dispose a tooltip in case of valid input
         const tooltip = bootstrap.Tooltip.getOrCreateInstance(element);
 
-        const invalidField = form.querySelector(".is-invalid"); // get the first input with an error and add focus on it
-
-        invalidField.focus();
-        console.log(invalidField);
-
-        tooltip.dispose(element);
+        tooltip.dispose();
         // console.log(`${elementName} is valid`);
       }
     });
