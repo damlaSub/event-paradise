@@ -23,28 +23,22 @@ for (const element of elements) {
       const elementName = element.name;
       const helptext = document.getElementById(`${elementName}-helptext`);
       helptext.classList.add("text-danger");
-      //1-add tooltips on inputs, selectors and textarea:
 
+      //1-add tooltip attributes on inputs, selectors and textarea:
       element.setAttribute("data-bs-toggle", "tooltip");
       element.setAttribute("data-bs-placement", "bottom");
       element.setAttribute("data-bs-custom-class", "custom-tooltip");
 
       //2- add tooltip according to error type:
-      //then setContent to tooltip-inner for changing its message
+
+      // then set a new content for the date and price in case they are "rangeUnderflow":
       if (element.validity.valueMissing == true) {
         element.setAttribute("data-bs-title", `${errorMessages.missed}`);
-      } else if (elementName == "date" && element.validity.rangeUnderflow) {
-        element.setAttribute("data-bs-title", `${errorMessages.date}`);
-      } else if (elementName == "price" && element.validity.rangeUnderflow) {
-        element.setAttribute("data-bs-title", `${errorMessages.price}`);
-      } else {
-        console.log("Salut toto");
       }
-
-      // I get/create the tooltip
+      // get/create the tooltip
       const tooltip = bootstrap.Tooltip.getOrCreateInstance(element);
 
-      // then I set a new content for the date and price in case they are "rangeUnderflow":
+      //then setContent to tooltip-inner for changing its message
       if (elementName == "date" && element.validity.rangeUnderflow) {
         tooltip.setContent({ ".tooltip-inner": `${errorMessages.date}` });
       } else if (elementName == "price" && element.validity.rangeUnderflow) {
@@ -54,11 +48,8 @@ for (const element of elements) {
       }
 
       // 3-add a tooltip on the first element with an error
-
       const invalidField = form.querySelector(".is-invalid"); // get the first input with an error and add focus on it
-
       invalidField.focus();
-      console.log(invalidField);
     });
 
     //add change event on inputs etc for instance changes:
@@ -85,11 +76,12 @@ for (const element of elements) {
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+
   for (const element of elements) {
     // implement toaster when the form subitted by success ("Événement créé avec succès.")
     toast.show();
-    // delete is-invalid class on input so there won't be a green border around the input
 
+    // delete is-invalid class on input so there won't be a green border around the input
     element.classList.remove("is-valid");
 
     //change helptexts color after the submission:
@@ -97,9 +89,8 @@ form.addEventListener("submit", (event) => {
     const helptext = document.getElementById(`${elementName}-helptext`);
     console.log(helptext);
     helptext.classList.remove("text-success");
-
-    //implement form reset
-    form.reset();
   }
+  //implement form reset
+  form.reset();
   console.log("submitted");
 });
