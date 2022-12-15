@@ -6,6 +6,12 @@ const elements = form.elements;
       console.log(elements[i]);
   }
   */
+
+//for tooltip:
+const options = {
+  title: "Ce champ est obligatoire",
+};
+
 // if I have invalid inputs:
 // there would be input alerts (red):
 // and tooltip as error messages:
@@ -30,23 +36,23 @@ for (const element of elements) {
       element.setAttribute("data-bs-custom-class", "custom-tooltip");
 
       //2- add tooltip according to error type:
-
+      let message = null;
       // then set a new content for the date and price in case they are "rangeUnderflow":
       if (element.validity.valueMissing == true) {
-        element.setAttribute("data-bs-title", `${errorMessages.missed}`);
-      }
-      // get/create the tooltip
-      const tooltip = bootstrap.Tooltip.getOrCreateInstance(element);
-
-      //then setContent to tooltip-inner for changing its message
-      if (elementName == "date" && element.validity.rangeUnderflow) {
-        tooltip.setContent({ ".tooltip-inner": `${errorMessages.date}` });
+        message = options.title;
+        element.setAttribute("data-bs-title", `${message}`);
+      } else if (elementName == "date" && element.validity.rangeUnderflow) {
+        message = errorMessages.date;
       } else if (elementName == "price" && element.validity.rangeUnderflow) {
-        tooltip.setContent({ ".tooltip-inner": `${errorMessages.price}` });
+        message = errorMessages.price;
       } else {
         console.log("toto");
       }
+      // get/create the tooltip
+      const tooltip = bootstrap.Tooltip.getOrCreateInstance(element, options);
 
+      //then setContent to tooltip-inner for changing its message
+      tooltip.setContent({ ".tooltip-inner": message });
       // 3-add a tooltip on the first element with an error
       const invalidField = form.querySelector(".is-invalid"); // get the first input with an error and add focus on it
       invalidField.focus();
