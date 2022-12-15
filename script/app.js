@@ -82,6 +82,8 @@ for (const element of elements) {
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+
+  //implement form reset
   form.reset();
   for (const element of elements) {
     // implement toaster when the form subitted by success ("Événement créé avec succès.")
@@ -96,8 +98,6 @@ form.addEventListener("submit", (event) => {
     console.log(helptext);
     helptext.classList.remove("text-success");
   }
-  //implement form reset
 
   console.log("submitted");
 });
-//have a problem with reset() > correction
