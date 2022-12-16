@@ -1,21 +1,6 @@
-//Date
+//Convert date format and give an html attribute to the date input in order to determine the min input value
 
-const inputDate = document.getElementById("input-date"); //.value;
-
+const inputDate = document.getElementById("input-date");
 const currentDate = new Date();
-
-let day = currentDate.getDate();
-if (day < 10) {
-  day = `0${day}`;
-}
-
-let month = currentDate.getMonth() + 1;
-if (month < 10) {
-  month = `0${month}`;
-}
-
-let year = currentDate.getFullYear();
-
-let dateFormat = year + "-" + month + "-" + day;
-
+const dateFormat = currentDate.toISOString().substr(0, 10);
 const minDateAttribute = inputDate.setAttribute("min", dateFormat);
