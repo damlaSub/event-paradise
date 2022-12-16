@@ -1,4 +1,5 @@
 const form = document.querySelector("form");
+const main = document.querySelector("main");
 
 const elements = form.elements;
 /*
@@ -40,7 +41,6 @@ for (const element of elements) {
       // then set a new content for the date and price in case they are "rangeUnderflow":
       if (element.validity.valueMissing == true) {
         message = options.title;
-        element.setAttribute("data-bs-title", `${message}`);
       } else if (elementName == "date" && element.validity.rangeUnderflow) {
         message = errorMessages.date;
       } else if (elementName == "price" && element.validity.rangeUnderflow) {
@@ -54,25 +54,27 @@ for (const element of elements) {
       //then setContent to tooltip-inner for changing its message
       tooltip.setContent({ ".tooltip-inner": message });
       // 3-add a tooltip on the first element with an error
-      const invalidField = form.querySelector(".is-invalid"); // get the first input with an error and add focus on it
-      invalidField.focus();
-    });
 
+      const firstInvalidField = form.querySelector(".is-invalid"); // get the first input with an error and add focus on it
+      if (firstInvalidField == element) {
+        firstInvalidField.focus();
+      }
+    });
     //add change event on inputs etc for instance changes:
 
     element.addEventListener("change", (event) => {
-      const elementName = element.name;
-      const helptext = document.getElementById(`${elementName}-helptext`);
       //console.log(`${elementName} has changed`);
       if (element.checkValidity()) {
+        const elementName = element.name;
+        const helptext = document.getElementById(`${elementName}-helptext`);
         //if my input has a valid value:
         element.classList.remove("is-invalid");
         element.classList.add("is-valid");
         helptext.classList.remove("text-danger");
         helptext.classList.add("text-success");
+
         // create and dispose a tooltip in case of valid input
         const tooltip = bootstrap.Tooltip.getOrCreateInstance(element);
-
         tooltip.dispose();
         // console.log(`${elementName} is valid`);
       }
@@ -85,10 +87,11 @@ form.addEventListener("submit", (event) => {
 
   //implement form reset
   form.reset();
-  for (const element of elements) {
-    // implement toaster when the form subitted by success ("Événement créé avec succès.")
-    toast.show();
 
+  // implement toaster when the form subitted by success ("Événement créé avec succès.")
+  toast.show();
+
+  for (const element of elements) {
     // delete is-invalid class on input so there won't be a green border around the input
     element.classList.remove("is-valid");
 
@@ -98,6 +101,4 @@ form.addEventListener("submit", (event) => {
     console.log(helptext);
     helptext.classList.remove("text-success");
   }
-
-  console.log("submitted");
 });

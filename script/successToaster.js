@@ -1,6 +1,6 @@
 // implement toaster for success "Événement créé avec succès." <div class="toast-container position-static">
 const toastContainer = document.createElement("div");
-form.appendChild(toastContainer);
+main.appendChild(toastContainer);
 toastContainer.classList.add(
   "toast-container",
   "position-absolute",
