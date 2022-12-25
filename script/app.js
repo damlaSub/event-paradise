@@ -15,7 +15,7 @@ const options = {
 
 // if I have invalid inputs:
 // there would be input alerts (red):
-// and tooltip as error messages:
+// and a tooltip as error messages:
 for (const element of elements) {
   // like for(String str: strings) at java
   const type = element.type;
@@ -98,7 +98,11 @@ form.addEventListener("submit", (event) => {
     //change helptexts color after the submission:
     const elementName = element.name;
     const helptext = document.getElementById(`${elementName}-helptext`);
-    console.log(helptext);
-    helptext.classList.remove("text-success");
+
+    //for not having a .remove method on submit button, I add an if.
+    type = element.type;
+    if (type != "submit") {
+      helptext.classList.remove("text-success");
+    }
   }
 });
