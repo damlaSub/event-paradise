@@ -2,11 +2,6 @@ const form = document.querySelector("form");
 const main = document.querySelector("main");
 
 const elements = form.elements;
-/*
-  for(let i = 0; i < elements.length; i++){
-      console.log(elements[i]);
-  }
-  */
 
 //for tooltip:
 const options = {
@@ -23,7 +18,6 @@ for (const element of elements) {
   if (type != "submit") {
     element.addEventListener("invalid", (event) => {
       event.preventDefault(); //prevent the event html validdation (field control)
-      //console.log(`${element.name} is invalid`);
 
       element.classList.add("is-invalid"); // we will get invalid elements
 
@@ -45,8 +39,6 @@ for (const element of elements) {
         message = errorMessages.date;
       } else if (elementName == "price" && element.validity.rangeUnderflow) {
         message = errorMessages.price;
-      } else {
-        console.log("toto");
       }
       // get/create the tooltip
       const tooltip = bootstrap.Tooltip.getOrCreateInstance(element, options);
@@ -63,7 +55,6 @@ for (const element of elements) {
     //add change event on inputs etc for instance changes:
 
     element.addEventListener("change", (event) => {
-      //console.log(`${elementName} has changed`);
       if (element.checkValidity()) {
         const elementName = element.name;
         const helptext = document.getElementById(`${elementName}-helptext`);
@@ -76,7 +67,6 @@ for (const element of elements) {
         // create and dispose a tooltip in case of valid input
         const tooltip = bootstrap.Tooltip.getOrCreateInstance(element);
         tooltip.dispose();
-        // console.log(`${elementName} is valid`);
       }
     });
   }
@@ -92,16 +82,16 @@ form.addEventListener("submit", (event) => {
   toast.show();
 
   for (const element of elements) {
-    // delete is-invalid class on input so there won't be a green border around the input
-    element.classList.remove("is-valid");
-
-    //change helptexts color after the submission:
-    const elementName = element.name;
-    const helptext = document.getElementById(`${elementName}-helptext`);
-
-    //for not having a .remove method on submit button, I add an if.
+    //for not having a remove method on submit button, add an if
     type = element.type;
     if (type != "submit") {
+      // delete is-invalid class on input so there won't be a green border around the input
+      element.classList.remove("is-valid");
+
+      //change helptexts color after the submission:
+      const elementName = element.name;
+      const helptext = document.getElementById(`${elementName}-helptext`);
+
       helptext.classList.remove("text-success");
     }
   }
