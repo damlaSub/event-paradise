@@ -27,6 +27,7 @@ public class LocationController {
 	public void create(
 			@RequestBody LocationCreateDto inputs) {
 		Location location = new Location();
+		location.setId(inputs.getId());
 		location.setName(inputs.getName());
 		DataBase.findAllLocations();
 	

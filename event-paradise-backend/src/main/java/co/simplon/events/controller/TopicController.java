@@ -27,6 +27,7 @@ public class TopicController {
 	public void create(
 			@RequestBody TopicCreateDto inputs) {
 		Topic topic = new Topic();
+		topic.setId(inputs.getId());
 		topic.setName(inputs.getName());
 		DataBase.findAllTopics();
 	
