@@ -6,16 +6,16 @@ import co.simplon.events.entities.Location;
 import co.simplon.events.entities.Topic;
 
 public class EventCreateDto {
-
-private Long id;
+	
+	private Long id;
 	
 	private String name;
 	
 	private LocalDate date;
 
-	private Topic topic;
+	private Long topicId;
 	
-	private Location location;
+	private Long locationId;
 	
 	private Double price;
 	
@@ -49,20 +49,20 @@ private Long id;
 		this.date = date;
 	}
 
-	public Topic getTopic() {
-		return topic;
+	public Long getTopicId() {
+		return topicId;
 	}
 
-	public void setTopic(Topic topic) {
-		this.topic = topic;
+	public void setTopicId(Long topicId) {
+		this.topicId = topicId;
 	}
 
-	public Location getLocation() {
-		return location;
+	public Long getLocationId() {
+		return locationId;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setLocationId(Long locationId) {
+		this.locationId = locationId;
 	}
 
 	public Double getPrice() {
@@ -83,9 +83,8 @@ private Long id;
 
 	@Override
 	public String toString() {
-		return "EventCreateDto [id=" + id + ", name=" + name + ", date=" + date + ", topic=" + topic + ", location="
-				+ location + ", price=" + price + ", description=" + description + "]";
+		return "EventCreateDto [id=" + id + ", name=" + name + ", date=" + date + ", topicId=" + topicId
+				+ ", locationId=" + locationId + ", price=" + price + ", description=" + description + "]";
 	}
-	
-	
+
 }

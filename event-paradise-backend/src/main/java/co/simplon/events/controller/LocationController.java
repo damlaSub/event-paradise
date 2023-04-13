@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.simplon.events.database.DataBase;
-import co.simplon.events.dtos.LocationCreateDto;
 import co.simplon.events.dtos.LocationView;
 import co.simplon.events.entities.Location;
 
@@ -22,17 +21,6 @@ import co.simplon.events.entities.Location;
 @CrossOrigin
 
 public class LocationController {
-	@PostMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-	public void create(
-			@RequestBody LocationCreateDto inputs) {
-		Location location = new Location();
-		location.setId(inputs.getId());
-		location.setName(inputs.getName());
-		DataBase.findAllLocations();
-	
-	}
-	
 	
 	@GetMapping
 	public Collection<LocationView> getAll(){
@@ -46,6 +34,5 @@ public class LocationController {
 	}
 	return views;
 }
-	
 	
 }

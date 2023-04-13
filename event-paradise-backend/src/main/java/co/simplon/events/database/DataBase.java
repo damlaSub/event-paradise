@@ -27,8 +27,7 @@ public class DataBase {
 
 		LOCATIONS.put(location2.getId(), location2);
 
-		LOCATIONS.put(location3.getId(), location3);
-		
+		LOCATIONS.put(location3.getId(), location3);	
 		
 	}
 	public static Collection<Location> findAllLocations() {
@@ -36,6 +35,9 @@ public class DataBase {
 		
 		}
 
+	public static Location findOneByLocation(Long id) {
+		return LOCATIONS.get(id);
+	}
 	private static Map<Long, Topic> TOPICS = new HashMap<>();
 	
 	static {
@@ -58,6 +60,9 @@ public class DataBase {
 		return TOPICS.values();
 		
 		}
+	public static Topic findOneByTopic(Long id) {
+		return TOPICS.get(id);
+	}
 	
 	public static Map<Long, Location> getLocationId() {
 		return LOCATIONS;
@@ -65,9 +70,11 @@ public class DataBase {
 	public static void setLocationId(Map<Long, Location> locationId) {
 		DataBase.LOCATIONS = locationId;
 	}
+	
 	public static Map<Long, Topic> getTopicId() {
 		return TOPICS;
 	}
+	
 	public static void setTopicId(Map<Long, Topic> topicId) {
 		DataBase.TOPICS = topicId;
 	}

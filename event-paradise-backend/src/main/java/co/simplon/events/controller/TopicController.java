@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.simplon.events.database.DataBase;
-import co.simplon.events.dtos.TopicCreateDto;
 import co.simplon.events.dtos.TopicView;
 import co.simplon.events.entities.Topic;
 
@@ -22,17 +21,6 @@ import co.simplon.events.entities.Topic;
 @CrossOrigin
 
 public class TopicController {
-	@PostMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-	public void create(
-			@RequestBody TopicCreateDto inputs) {
-		Topic topic = new Topic();
-		topic.setId(inputs.getId());
-		topic.setName(inputs.getName());
-		DataBase.findAllTopics();
-	
-	}
-	
 	
 	@GetMapping
 	public Collection<TopicView> getAll(){
@@ -46,6 +34,5 @@ public class TopicController {
 	}
 	return views;
 }
-	
-	
+		
 }

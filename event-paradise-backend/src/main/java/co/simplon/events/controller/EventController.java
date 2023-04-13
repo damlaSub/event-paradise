@@ -16,6 +16,7 @@ import co.simplon.events.database.DataBase;
 import co.simplon.events.dtos.EventCreateDto;
 import co.simplon.events.dtos.EventView;
 import co.simplon.events.entities.Event;
+import co.simplon.events.database.DataBase;
 
 @RestController
 @RequestMapping("/events")
@@ -29,29 +30,12 @@ public class EventController {
 		Event event = new Event();
 		event.setName(inputs.getName());
 		event.setDate(inputs.getDate());
-		event.setTopic(inputs.getTopic());
-		event.setLocation(inputs.getLocation());
+		event.setTopic(DataBase.findOneByTopic(inputs.getTopicId()));
+		event.setLocation(DataBase.findOneByLocation(inputs.getLocationId()));
 		event.setPrice(inputs.getPrice());
 		event.setDescription(inputs.getDescription());
 		DataBase.createEvent(event);
+		System.out.println(event);
 	}
-
-	@GetMapping
-	public Collection<EventView> getAll(){
-		Collection<Event> events = DataBase.findAllEvents();
-		Collection<EventView> eventViews = new ArrayList<>();
-		for(Event event: events) {
-			EventView eventView = new EventView();
-			eventView.setId(event.getId());
-			eventView.setName(event.getName());
-			eventView.setTopic(event.getTopic());
-			eventView.setLocation(event.getLocation());
-			eventView.setPrice(event.getPrice());
-			eventView.setDescription(event.getDescription());
-			eventViews.add(eventView);
-		}
-		return eventViews;
 		 
-	}
-	
 }
