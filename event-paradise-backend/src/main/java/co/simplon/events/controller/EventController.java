@@ -37,5 +37,6 @@ public class EventController {
 		DataBase.createEvent(event);
 		System.out.println(event);
 	}
+	
 		 
 }

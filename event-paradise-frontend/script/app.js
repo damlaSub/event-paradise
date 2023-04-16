@@ -59,10 +59,8 @@ for (const element of elements) {
         const elementName = element.name;
         const helptext = document.getElementById(`${elementName}-helptext`);
         //if my input has a valid value:
-        element.classList.remove("is-invalid");
-        element.classList.add("is-valid");
-        helptext.classList.remove("text-danger");
-        helptext.classList.add("text-success");
+        element.classList.replace("is-invalid", "is-valid");
+        helptext.classList.replace("text-danger", "text-success");
 
         // create and dispose a tooltip in case of valid input
         const tooltip = bootstrap.Tooltip.getOrCreateInstance(element);
@@ -72,27 +70,29 @@ for (const element of elements) {
   }
 }
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+function handleSubmit(form) {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  //implement form reset
-  form.reset();
+    //implement form reset
+    form.reset();
 
-  // implement toaster when the form subitted by success ("Événement créé avec succès.")
-  toast.show();
+    // implement toaster when the form subitted by success ("Événement créé avec succès.")
+    toast.show();
 
-  for (const element of elements) {
-    //for not having a remove method on submit button, add an if
-    type = element.type;
-    if (type != "submit") {
-      // delete is-invalid class on input so there won't be a green border around the input
-      element.classList.remove("is-valid");
+    for (const element of elements) {
+      //for not having a remove method on submit button, add an if
+      type = element.type;
+      if (type != "submit") {
+        // delete is-valid class on input so there won't be a green border around the input
+        element.classList.remove("is-valid");
 
-      //change helptexts color after the submission:
-      const elementName = element.name;
-      const helptext = document.getElementById(`${elementName}-helptext`);
+        //change helptexts color after the submission:
+        const elementName = element.name;
+        const helptext = document.getElementById(`${elementName}-helptext`);
 
-      helptext.classList.remove("text-success");
+        helptext.classList.remove("text-success");
+      }
     }
-  }
-});
+  });
+}
